@@ -13,8 +13,10 @@ describe 'Usuário visita tela inicial' do
 
 	it 'e vê os galpões cadastrados' do
 		# Arrange
-		Warehouse.create(name: 'Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000)
-		Warehouse.create(name: 'Maceió', code: 'MCZ', city: 'Maceió', area: 50_000)
+		Warehouse.create!(name: 'Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000,
+			address: 'Av Oceânica, 500', cep: '20000-000', description: 'Galpão no Rio')
+		Warehouse.create!(name: 'Maceió', code: 'MCZ', city: 'Maceió', area: 50_000,
+			address: 'Av da Praia, 800', cep: '56000-000', description: 'Galpão em Maceió')
 	
 		# Act
 		visit('/')
