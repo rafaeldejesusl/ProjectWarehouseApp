@@ -106,5 +106,17 @@ RSpec.describe Warehouse, type: :model do
       # Assert
       expect(result).to eq false
     end
+
+    it 'falso quando o CEP estiver com formato inválido' do
+      # Arrange
+      second_warehouse = Warehouse.new(name: 'Niteroi', code: 'RIO', address: 'Avenida',
+        cep: '35000-0000', city: 'Niteroi', area: 1500, description: 'Outra descrição')
+    
+      # Act
+      result = second_warehouse.valid?
+    
+      # Assert
+      expect(result).to eq false
+    end
 	end
 end
