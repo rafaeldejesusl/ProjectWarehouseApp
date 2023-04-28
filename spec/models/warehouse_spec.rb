@@ -53,6 +53,19 @@ RSpec.describe Warehouse, type: :model do
 			# Assert
 			expect(result).to eq false
 		end
+
+    it 'falso quando a cidade é vazia' do
+			# Arrange
+			warehouse = Warehouse.new(name: 'Rio de Janeiro', code: 'RIO', address: 'Endereço',
+				cep: '25000-000', city: '', area: 1000,
+				description: 'Alguma descrição')
+
+			# Act
+			result = warehouse.valid?
+
+			# Assert
+			expect(result).to eq false
+		end
 			# Assert
 			expect(result).to eq false
 		end
