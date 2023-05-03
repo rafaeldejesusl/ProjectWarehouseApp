@@ -1,5 +1,9 @@
 <h1>Fornecedores</h1>
 
+<div>
+	<%= link_to('Cadastrar Fornecedor', new_supplier_path) %>
+</div>
+
 <% if @suppliers.any? %>
 	<% @suppliers.each do |s| %>
 		<div>
