@@ -21,4 +21,20 @@ describe 'Usuário vê detalhes de um fornecedor' do
 		expect(page).to have_content('CNPJ: 07317108000151')
     expect(page).to have_content('E-mail: sac@samsung.com.br')
 	end
+
+  it 'e volta para a tela inicial' do
+    # Arrange
+    Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Eletronicos LTDA',
+      registration_number: '07317108000151', full_address: 'Av Nacoes Unidas, 1000',
+      city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
+  
+    # Act
+    visit root_path
+		click_on 'Fornecedores'
+    click_on 'Samsung'
+    click_on 'Voltar'
+  
+    # Assert
+    expect(current_path).to eq('/')
+  end
 end
