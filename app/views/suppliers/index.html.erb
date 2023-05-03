@@ -1,1 +1,18 @@
 <h1>Fornecedores</h1>
+
+<% if @suppliers.any? %>
+	<% @suppliers.each do |s| %>
+		<div>
+			<h2><%= s.brand_name %></h2>
+			<dl>
+				<dt>Razão Social</dt>
+				<dd><%= s.corporate_name %></dd>
+			  <dt>Cidade</dt>
+				<dd><%= s.city %></dd>
+			</dl>
+		<div>
+	<% end %>
+
+<% else %>
+	<p>Nenhum fornecedor cadastrado</p>
+<% end %>
