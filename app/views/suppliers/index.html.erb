@@ -3,7 +3,9 @@
 <% if @suppliers.any? %>
 	<% @suppliers.each do |s| %>
 		<div>
-			<h2><%= s.brand_name %></h2>
+      <%= link_to supplier_path(s.id) do %>
+			  <h2><%= s.brand_name %></h2>
+      <% end %>
 			<dl>
 				<dt>Razão Social</dt>
 				<dd><%= s.corporate_name %></dd>
