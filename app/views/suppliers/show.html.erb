@@ -8,5 +8,8 @@
   <strong>E-mail:</strong> <%= @supplier.email %>
 </div>
 <div>
+	<%= link_to('Editar', edit_supplier_path(@supplier.id)) %>
+</div>
+<div>
   <%= link_to('Voltar', root_path) %>
 </div>

@@ -22,4 +22,23 @@ class SuppliersController < ApplicationController
 			render 'new'
 		end	
 	end
+
+	def edit
+		id = params[:id]
+		@supplier = Supplier.find(id)
+	end
+
+	def update
+		id = params[:id]
+		@supplier = Supplier.find(id)
+	
+		supplier_params = params.require(:supplier).permit(:brand_name, :corporate_name, :city,
+			:state, :full_address, :registration_number, :email)
+		if @supplier.update(supplier_params)
+			redirect_to supplier_path(@supplier.id), notice: 'Fornecedor atualizado com sucesso'
+		else
+			flash.now[:notice] = 'Não foi possível atualizar o fornecedor'
+			render 'edit'
+		end
+	end
 end
