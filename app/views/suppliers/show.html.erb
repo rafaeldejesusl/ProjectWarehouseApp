@@ -13,3 +13,13 @@
 <div>
   <%= link_to('Voltar', root_path) %>
 </div>
+<div>
+	<h3>Modelos de Produto do Fornecedor:</h3>
+	<% if @supplier.product_models.any? %>
+		<% @supplier.product_models.each do |pm| %>
+			<%= link_to pm.name, product_model_path(pm.id) %>
+		<% end %>
+	<% else %>
+		<p>Nenhum modelo de produto cadastrado</p>
+	<% end %>
+</div>
