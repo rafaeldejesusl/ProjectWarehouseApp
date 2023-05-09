@@ -1,5 +1,7 @@
 class ProductModelsController < ApplicationController
-	def index
+	before_action :authenticate_user!
+  
+  def index
 		@product_models = ProductModel.all
 	end
 

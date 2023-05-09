@@ -1,10 +1,25 @@
 require 'rails_helper'
 
 describe 'Usuário vê fornecedores' do
-	it 'a partir do menu' do
+	it 'se estiver autenticado' do
+    # Arrange
+  
+    # Act
+    visit root_path
+    within('nav') do
+      click_on 'Fornecedores'
+    end
+  
+    # Assert
+    expect(current_path).to eq new_user_session_path
+  end
+  
+  it 'a partir do menu' do
 		# Arrange
+    user = User.create!(email: 'joao@email.com', password: 'password')
 
 		# Act
+    login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Fornecedores'
@@ -16,6 +31,7 @@ describe 'Usuário vê fornecedores' do
 
   it 'com sucesso' do
     # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'password')
     Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Eletronicos LTDA',
       registration_number: '7317108000151', full_address: 'Av Nacoes Unidas, 1000',
       city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
@@ -24,6 +40,7 @@ describe 'Usuário vê fornecedores' do
       city: 'Guarulhos', state: 'SP', email: 'contato@lg.com.br')
   
     # Act
+    login_as(user)
     visit root_path
     within('nav') do
       click_on 'Fornecedores'
@@ -40,8 +57,10 @@ describe 'Usuário vê fornecedores' do
   
   it 'e não existem fornecedores cadastrados' do
     # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'password')
   
     # Act
+    login_as(user)
     visit root_path
     within('nav') do
       click_on 'Fornecedores'

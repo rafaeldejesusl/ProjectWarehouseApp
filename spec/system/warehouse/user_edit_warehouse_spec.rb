@@ -3,12 +3,14 @@ require 'rails_helper'
 describe 'Usuário edita um galpão' do
 	it 'a partir da página de detalhes' do
 		# Arrange
+    user = User.create!(email: 'joao@email.com', password: 'password')
 		w = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos',
 			area: 100_000, address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
 			description: 'Galpão destinado para cargas internacionais'
 		)
 
 		# Act
+    login_as(user)
 		visit root_path
 		click_on 'Aeroporto SP'
 		click_on 'Editar'
@@ -26,12 +28,14 @@ describe 'Usuário edita um galpão' do
 
   it 'com sucesso' do
     # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'password')
     w = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos',
       area: 100_000, address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
       description: 'Galpão destinado para cargas internacionais'
     )
   
     # Act
+    login_as(user)
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Editar'
@@ -51,12 +55,14 @@ describe 'Usuário edita um galpão' do
 
   it 'e mantém os campos obrigatórios' do
     # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'password')
     w = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos',
       area: 100_000, address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
       description: 'Galpão destinado para cargas internacionais'
     )
   
     # Act
+    login_as(user)
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Editar'

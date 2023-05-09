@@ -7,7 +7,6 @@ describe 'Usuário se autentica' do
 
 		# Act
 		visit root_path
-		click_on 'Entrar'
 		fill_in 'E-mail', with: 'joao@email.com'
 		fill_in 'Senha', with: 'password'
 		within('form') do
@@ -29,7 +28,6 @@ describe 'Usuário se autentica' do
   
     # Act
     visit root_path
-    click_on 'Entrar'
     fill_in 'E-mail', with: 'joao@email.com'
     fill_in 'Senha', with: 'password'
     within('form') do
@@ -41,6 +39,6 @@ describe 'Usuário se autentica' do
     expect(page).to have_link 'Entrar'
     expect(page).not_to have_button 'Sair'
     expect(page).not_to have_content 'joao@email.com'
-    expect(page).to have_content 'Logout efetuado com sucesso.'
+    expect(current_path).to eq new_user_session_path
   end
 end

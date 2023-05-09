@@ -3,11 +3,13 @@ require 'rails_helper'
 describe 'Usuário edita um fornecedor' do
 	it 'a partir da página de detalhes' do
 		# Arrange
+    user = User.create!(email: 'joao@email.com', password: 'password')
 		Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Eletronicos LTDA',
       registration_number: '7317108000151', full_address: 'Av Nacoes Unidas, 1000',
       city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
 
 		# Act
+    login_as(user)
 		visit root_path
 		click_on('Fornecedores')
     click_on('Samsung')	
@@ -26,11 +28,13 @@ describe 'Usuário edita um fornecedor' do
 
   it 'com sucesso' do
     # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'password')
     Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Eletronicos LTDA',
       registration_number: '7317108000151', full_address: 'Av Nacoes Unidas, 1000',
       city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
   
     # Act
+    login_as(user)
     visit root_path
 		click_on('Fornecedores')
     click_on('Samsung')	
@@ -51,11 +55,13 @@ describe 'Usuário edita um fornecedor' do
 
   it 'e mantém os campos obrigatórios' do
     # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'password')
     Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Eletronicos LTDA',
       registration_number: '7317108000151', full_address: 'Av Nacoes Unidas, 1000',
       city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
   
     # Act
+    login_as(user)
     visit root_path
 		click_on('Fornecedores')
     click_on('Samsung')	

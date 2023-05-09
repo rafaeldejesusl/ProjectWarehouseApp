@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'Usuário vê detalhes de um fornecedor' do
 	it 'e vê informações adicionais' do
 		# Arrange
+    user = User.create!(email: 'joao@email.com', password: 'password')
 		supplier = Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Eletronicos LTDA',
       registration_number: '7317108000151', full_address: 'Av Nacoes Unidas, 1000',
       city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
@@ -15,6 +16,7 @@ describe 'Usuário vê detalhes de um fornecedor' do
       depth: 20, sku: 'SOU71-SAMSU-NOIZ77', supplier: other_supplier)
     
 		# Act
+    login_as(user)
 		visit root_path
 		click_on('Fornecedores')
     click_on('Samsung')	
@@ -33,11 +35,13 @@ describe 'Usuário vê detalhes de um fornecedor' do
 
   it 'e volta para a tela inicial' do
     # Arrange
+    user = User.create!(email: 'joao@email.com', password: 'password')
     Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Eletronicos LTDA',
       registration_number: '7317108000151', full_address: 'Av Nacoes Unidas, 1000',
       city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
   
     # Act
+    login_as(user)
     visit root_path
 		click_on 'Fornecedores'
     click_on 'Samsung'
