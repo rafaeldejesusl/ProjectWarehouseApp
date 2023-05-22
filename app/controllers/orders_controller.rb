@@ -24,4 +24,8 @@ class OrdersController < ApplicationController
 		@code = params['query']
 		@orders = Order.where("code LIKE ?", "%#{@code}%")
 	end
+
+	def index
+		@orders = current_user.orders
+	end
 end
