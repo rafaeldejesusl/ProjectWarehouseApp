@@ -4,6 +4,7 @@ pt-BR:
       order: 'Pedido'
     attributes:
       order:
+        code: 'Código'
         warehouse: 'Galpão Destino'
         warehouse_id: 'Galpão Destino'
         supplier: 'Fornecedor'
