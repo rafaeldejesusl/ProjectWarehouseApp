@@ -12,13 +12,61 @@ RSpec.describe Order, type: :model do
         registration_number: '3447216000102', full_address: 'Av das Palmas, 100',
         city: 'Bauru', state: 'SP', email: 'contato@acme.com')
       order = Order.new(user: user, warehouse: warehouse, supplier: supplier,
-        estimated_delivery_date: '2022-10-01')
+        estimated_delivery_date: 1.day.from_now)
   
       # Act
       result = order.valid?
   
       # Assert
       expect(result).to be true
+    end
+
+    it 'data estimada de entrega deve ser obrigatória' do
+      # Arrange
+      order = Order.new(estimated_delivery_date: '')
+    
+      # Act
+      order.valid?
+      result = order.errors.include?(:estimated_delivery_date)
+    
+      # Assert
+      expect(result).to be true
+    end
+
+    it 'data estimada de entrega não deve ser passada' do
+      # Arrange
+      order = Order.new(estimated_delivery_date: 1.day.ago)
+    
+      # Act
+      order.valid?
+      result = order.errors.include?(:estimated_delivery_date)
+    
+      # Assert
+      expect(result).to be true
+      expect(order.errors[:estimated_delivery_date]).to include(' deve ser futura.')
+    end
+
+    it 'data estimada de entrega não deve ser hoje' do
+      # Arrange
+      order = Order.new(estimated_delivery_date: Date.today)
+    
+      # Act
+      order.valid?
+    
+      # Assert
+      expect(order.errors.include?(:estimated_delivery_date)).to be true
+      expect(order.errors[:estimated_delivery_date]).to include(' deve ser futura.')
+    end
+    
+    it 'data estimada de entrega deve ser igual ou maior que amanhã' do
+      # Arrange
+      order = Order.new(estimated_delivery_date: 1.day.from_now)
+    
+      # Act
+      order.valid?
+    
+      # Assert
+      expect(order.errors.include?(:estimated_delivery_date)).to be false
     end
   end
 
@@ -33,7 +81,7 @@ RSpec.describe Order, type: :model do
         registration_number: '3447216000102', full_address: 'Av das Palmas, 100',
         city: 'Bauru', state: 'SP', email: 'contato@acme.com')
       order = Order.new(user: user, warehouse: warehouse, supplier: supplier,
-        estimated_delivery_date: '2022-10-01')
+        estimated_delivery_date: 1.day.from_now)
   
       # Act
       order.save!
@@ -54,9 +102,9 @@ RSpec.describe Order, type: :model do
         registration_number: '3447216000102', full_address: 'Av das Palmas, 100',
         city: 'Bauru', state: 'SP', email: 'contato@acme.com')
       first_order = Order.create!(user: user, warehouse: warehouse, supplier: supplier,
-        estimated_delivery_date: '2022-10-01')
+        estimated_delivery_date: 1.day.from_now)
       second_order = Order.new(user: user, warehouse: warehouse, supplier: supplier,
-        estimated_delivery_date: '2022-11-15')
+        estimated_delivery_date: 1.day.from_now)
   
       # Act
       second_order.save!
