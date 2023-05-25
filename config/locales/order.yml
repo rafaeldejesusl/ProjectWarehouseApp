@@ -1,4 +1,7 @@
 pt-BR:
+  pending: 'Pendente'
+  canceled: 'Cancelado'
+  delivered: 'Entregue'
   activerecord:
     models:
       order:
@@ -7,6 +10,7 @@ pt-BR:
     attributes:
       order:
         code: 'Código'
+        status: 'Situação do Pedido'
         warehouse: 'Galpão Destino'
         warehouse_id: 'Galpão Destino'
         supplier: 'Fornecedor'
